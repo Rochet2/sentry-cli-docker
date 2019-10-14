@@ -1,0 +1,31 @@
+description: >
+  Creates a new release and finalizes it immediately
+parameters:
+  sentry_url:
+    type: string
+    default: "https://sentry.io/"
+    description: "SENTRY_URL, the URL to use to connect to sentry."
+  sentry_auth_token:
+    type: string
+    description: "SENTRY_AUTH_TOKEN, the authentication token to access the sentry installation."
+  sentry_org:
+    type: string
+    description: "SENTRY_ORG, the slug of the organization to use for a command."
+  sentry_project:
+    type: string
+    description: "SENTRY_PROJECT, the slug of the project to use for a command."
+  container:
+    type: string
+    description: "name of the container to execute the sentry commands in"
+  version:
+    type: string
+    description: "version to use for the release"
+steps:
+  - run:
+      name: Create new sentry release
+      command: docker exec --env SENTRY_URL=<< parameters.sentry_url >> \
+                           --env SENTRY_AUTH_TOKEN=<< parameters.sentry_auth_token >> \
+                           --env SENTRY_ORG=<< parameters.sentry_org >> \
+                           --env SENTRY_PROJECT=<< parameters.sentry_project >> \
+                           << parameters.container >> \
+                           sh -c 'sentry-cli releases new --finalize << parameters.version >>'
