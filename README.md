@@ -2,9 +2,50 @@
 
 ## Usage
 
-## Commands
+```
+version: 2.1
 
-## Jobs
+orbs:
+  sentry-cli-docker: rochet2/sentry-cli-docker@volatile
+
+executors:
+  my-executor:
+    working_directory: ~/app
+    machine:
+      image: ubuntu-1604:201903-01
+
+jobs:
+  build:
+    executor: my-executor
+    steps:
+      - checkout
+      - run:
+          name: Set up an example container that contains things to release with sentry
+          command: |
+            docker build -t foo .
+            docker run -d foo
+            sleep 1
+      - sentry-cli-docker/install:
+          container: foo
+      - sentry-cli-docker/releasefinalize:
+          container: foo
+          sentry_auth_token: yourtokenyourtokenyourtoken
+          sentry_org: yourorg
+          sentry_project: yourproject
+          version: yourversionstring
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+
+```
+
+## Commands
 
 ## Help
 

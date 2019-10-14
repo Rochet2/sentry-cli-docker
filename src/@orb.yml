@@ -1,15 +1,13 @@
 version: 2.1
 
 description: >
-  Sample orb description
-  # What will your orb allow users to do?
-  # Descriptions should be short, simple, and clear.
+  this orb allows executing sentry commands in a docker container
 
-orbs:
-  hello: circleci/hello-build@0.0.5 # Sample imported orb
+# orbs:
+#   sentry-cli-docker: rochet2/sentry-cli-docker@volatile
 
-commands:
-  greet:
-    description: "A very simple command for demonstration purposes"
-    steps:
-      - run: echo foo
+# commands:
+#   greet:
+#     description: "A very simple command for demonstration purposes"
+#     steps:
+#       - run: echo foo

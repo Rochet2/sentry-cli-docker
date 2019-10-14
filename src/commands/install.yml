@@ -1,0 +1,10 @@
+description: >
+  Installs sentry-cli in a container
+parameters:
+  container:
+    type: string
+    description: "name of the container to execute the sentry commands in"
+steps:
+  - run:
+      name: Install sentry-cli
+      command: docker exec << parameters.container >> sh -c 'curl -sL https://sentry.io/get-cli/ | sh'
