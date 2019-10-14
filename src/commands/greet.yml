@@ -11,4 +11,4 @@ parameters:
 steps:
   - run:
       name: Hello World
-      command: echo << parameters.greeting >> world
+      command: echo << parameters.greeting >> world release?
